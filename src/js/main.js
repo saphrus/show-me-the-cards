@@ -1,28 +1,57 @@
-function Player(name, surname, asset) {
-    var that = this;
+function Player(name, surname, nick, asset) {
+    //var that = this;
     this.name = name;
     this.surname = surname;
+    this.nick = nick;
     this.asset = asset;
+    /*
+     function getName() {
+     return that.name;
+     }
 
-    function getName() {
-        return that.name;
-    }
+     function getSurname() {
+     return that.surname;
+     }
 
-    function getSurname() {
-        return that.surname;
-    }
+     function getNick() {
+     return that.nick;
+     }
 
-    function getAsset() {
-        return that.asset;
-    }
+     function getAsset() {
+     return that.asset;
+     }
+     */
 }
 
-var player1 = new Player(
-    "Darcy Candice Ball",
-    "Crystaldash",
-    "Secret Glowquake Gold"
-);
 
-player1.getName();
-player1.getSurname();
-player1.getAsset();
+var players = [];
+
+$.getJSON('players.json', function (data) {
+    $.each(data.players, function (key, val) {
+        players.push(new Player(
+            val.name,
+            val.surname,
+            val.nick,
+            val.asset
+        ));
+        var newCard =
+            '<li class="card-preview">' +
+                '<div class="name">'+ val.name + " " + val.surname +'</div>' +
+                '<div class="nick">' + val.nick + '</div>' +
+                '<div class="asset">' + val.asset + '</div>' +
+            '</li>';
+        $(newCard).appendTo("nav ul");
+    });
+
+    var cards = $("nav ul li.card-preview");
+
+    $(cards).click(function() {
+        $(cards).removeClass("active");
+        $(this).addClass("active");
+    });
+});
+
+
+$(window).load(function () {
+
+});

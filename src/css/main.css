@@ -85,11 +85,25 @@ textarea {
 }
 
 /* ==========================================================================
+    Generic Styles
+   ========================================================================== */
+
+#content {
+    width: 600px;
+    background-color: #eee;
+    position: relative;
+}
+
+
+/* ==========================================================================
     Card style
    ========================================================================== */
 
 #card {
-
+    width: 300px;
+    height: 150px;
+    background-color: #ddd;
+    margin: auto;
 }
 
 /* ==========================================================================
@@ -97,16 +111,33 @@ textarea {
    ========================================================================== */
 
 nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px 40px;
+    padding: 20px 10px;
     background-color: yellow;
 }
 
-nav .card-preview {
+nav li.card-preview {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #ddd;
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: -10px -20px 20px rgba(0, 0, 0, 0.65);
+}
+nav li.card-preview:hover {
+    transition: background-color 0.75s ease;
+    background-color: white;
+}
+nav li.card-preview.active {
+    transition: box-shadow 0.75s ease;
+    box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.65);
+}
 
+nav li.card-preview > * {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* ==========================================================================
