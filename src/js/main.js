@@ -23,6 +23,29 @@ function Player(name, surname, nick, asset) {
      */
 }
 
+function addCardPreviewListeners() {
+    var cardsPreviews = $("nav ul li.card-preview");
+    var theCard = $("#card");
+
+    $(cardsPreviews).click(function () {
+        var that = this;
+        $(theCard).removeClass("invisible");
+        $(cardsPreviews).removeClass("active");
+        $(this).addClass("active");
+
+        $(theCard).find(".name").fadeOut(500, function() {
+            $(this).text($(that).find(".name").text()).fadeIn(350);
+        });
+
+        $(theCard).find(".nick").fadeOut(500, function() {
+            $(this).text($(that).find(".nick").text()).fadeIn(350);
+        });
+        
+        $(theCard).find(".asset").fadeOut(500, function() {
+            $(this).text($(that).find(".asset").text()).fadeIn(350);
+        });
+    });
+}
 
 var players = [];
 
@@ -42,13 +65,7 @@ $.getJSON('players.json', function (data) {
             '</li>';
         $(newCard).appendTo("nav ul");
     });
-
-    var cards = $("nav ul li.card-preview");
-
-    $(cards).click(function () {
-        $(cards).removeClass("active");
-        $(this).addClass("active");
-    });
+    addCardPreviewListeners();
 });
 
 $('#sortAsc').on('click', function () {
@@ -56,13 +73,7 @@ $('#sortAsc').on('click', function () {
         return $(a).find(".name").text() > $(b).find(".name").text();
     });
     $("nav ul").html(sorted);
-
-    var cards = $("nav ul li.card-preview");
-
-    $(cards).click(function () {
-        $(cards).removeClass("active");
-        $(this).addClass("active");
-    });
+    addCardPreviewListeners();
 });
 
 $('#sortDesc').on('click', function () {
@@ -70,13 +81,7 @@ $('#sortDesc').on('click', function () {
         return $(a).find(".name").text() < $(b).find(".name").text();
     });
     $("nav ul").html(sorted);
-
-    var cards = $("nav ul li.card-preview");
-
-    $(cards).click(function () {
-        $(cards).removeClass("active");
-        $(this).addClass("active");
-    });
+    addCardPreviewListeners();
 });
 
 
