@@ -10,8 +10,12 @@ var plugins = require('gulp-load-plugins')();
 // Temporary solution until gulp 4
 // https://github.com/gulpjs/gulp/issues/355
 var runSequence = require('run-sequence');
-
+var minify = require('gulp-minify');
+var concat = require('gulp-concat');
 var pkg = require('./package.json');
+var concatCss = require('gulp-concat-css');
+var cleanCSS = require('gulp-clean-css');
+var htmlmin = require('gulp-htmlmin');
 var dirs = pkg['h5bp-configs'].directories;
 
 // ---------------------------------------------------------------------
@@ -84,14 +88,14 @@ gulp.task('copy:.htaccess', function () {
 
 gulp.task('copy:index.html', function () {
     return gulp.src(dirs.src + '/index.html')
-               .pipe(plugins.replace(/{{JQUERY_VERSION}}/g, pkg.devDependencies.jquery))
+               .pipe(htmlmin({collapseWhitespace: true}))
                .pipe(gulp.dest(dirs.dist));
 });
 
 gulp.task('copy:jquery', function () {
     return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
                .pipe(plugins.rename('jquery-' + pkg.devDependencies.jquery + '.min.js'))
-               .pipe(gulp.dest(dirs.dist + '/js/vendor'));
+               .pipe(gulp.dest(dirs.src + '/js/vendor'));
 });
 
 gulp.task('copy:license', function () {
@@ -135,7 +139,8 @@ gulp.task('copy:misc', function () {
 
 gulp.task('copy:normalize', function () {
     return gulp.src('node_modules/normalize.css/normalize.css')
-               .pipe(gulp.dest(dirs.dist + '/css'));
+        .pipe(cleanCSS({compatibility: ''}))
+        .pipe(gulp.dest(dirs.dist + '/css'));
 });
 
 gulp.task('lint:js', function () {
@@ -149,6 +154,25 @@ gulp.task('lint:js', function () {
       .pipe(plugins.jshint.reporter('fail'));
 });
 
+
+
+gulp.task('compress', function() {
+    gulp.src([dirs.src + '/js/vendor/**/*', 'src/js/*'])
+        .pipe(concat('all.js'))
+        .pipe(minify({
+            ext:{
+                src:'-debug.js',
+                min:'-min.js'
+            }
+        }))
+        .pipe(gulp.dest(dirs.dist + '/js'));
+
+    gulp.src(dirs.src + '/css/*.css')
+        .pipe(concatCss("all.css"))
+        .pipe(cleanCSS({compatibility: ''}))
+        .pipe(gulp.dest(dirs.dist + '/css'));
+    
+});
 
 // ---------------------------------------------------------------------
 // | Main tasks                                                        |
@@ -165,7 +189,7 @@ gulp.task('archive', function (done) {
 gulp.task('build', function (done) {
     runSequence(
         ['clean', 'lint:js'],
-        'copy',
+        ['compress','copy'],
     done);
 });
 

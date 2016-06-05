@@ -33,23 +33,24 @@ function addCardPreviewListeners() {
         $(cardsPreviews).removeClass("active");
         $(this).addClass("active");
 
-        $(theCard).find(".name").fadeOut(500, function() {
+        $(theCard).find(".name").fadeOut(500, function () {
             $(this).text($(that).find(".name").text()).fadeIn(350);
         });
 
-        $(theCard).find(".nick").fadeOut(500, function() {
+        $(theCard).find(".nick").fadeOut(500, function () {
             $(this).text($(that).find(".nick").text()).fadeIn(350);
         });
-        
-        $(theCard).find(".asset").fadeOut(500, function() {
+
+        $(theCard).find(".asset").fadeOut(500, function () {
             $(this).text($(that).find(".asset").text()).fadeIn(350);
         });
     });
 }
 
-var players = [];
+
 
 $.getJSON('players.json', function (data) {
+    var players = [];
     $.each(data.players, function (key, val) {
         players.push(new Player(
             val.name,
@@ -59,7 +60,7 @@ $.getJSON('players.json', function (data) {
         ));
         var newCard =
             '<li class="card-preview">' +
-            '<div class="name">' + val.name + " " + val.surname + '</div>' +
+            '<div class="name"><span class="first">' + val.name + '</span><span class="last"> ' + val.surname + '</span></div>' +
             '<div class="nick">' + val.nick + '</div>' +
             '<div class="asset">' + val.asset + '</div>' +
             '</li>';
@@ -84,7 +85,35 @@ $('#sortDesc').on('click', function () {
     addCardPreviewListeners();
 });
 
+$('#sendNames').on('click', function () {
+    var playerCard = $("nav ul li.card-preview.active");
+    var playerData = [
+        {
+            "name": $(playerCard).find(".first").text(),
+            "surname": $(playerCard).find(".last").text(),
+            "nick": $(playerCard).find(".nick").text(),
+            "asset": $(playerCard).find(".asset").text()
+        }
+    ];
 
-$(window).load(function () {
+    $.ajax = function(params){
+            params.success({ return: params });
+    };
 
+    $.ajax({
+        type: "POST",
+        url: "mock",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify({Player: playerData}),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            window.alert("see console (F12 in most cases)");
+            console.log(data);
+        },
+        failure: function (errMsg) {
+            window.alert("see console (F12 in most cases)");
+            console.log(errMsg);
+        }
+    });
 });
