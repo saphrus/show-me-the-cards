@@ -1,3 +1,5 @@
+/*! HTML5 Boilerplate v0.0.1 | MIT License | https://html5boilerplate.com/ */
+
 /*
  * What follows is the result of much research on cross-browser styling.
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
@@ -21,6 +23,11 @@ html {
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
 
 ::selection {
     background: #b3d4fc;
@@ -96,8 +103,6 @@ textarea {
 
 button {
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
-    -webkit-box-shadow: 5px 5px 5px -6px rgba(119, 63, 25, 0.75);
-    -moz-box-shadow: 5px 5px 5px -6px rgba(119, 63, 25, 0.75);
     box-shadow: 5px 5px 5px -6px rgba(119, 63, 25, 0.75);
     border: 1px solid grey;
     background-color: #ddd;
@@ -107,8 +112,8 @@ button {
 }
 
 button:active {
+    -webkit-transition: box-shadow 0.75s ease;
     transition: box-shadow 0.75s ease;
-    -moz-box-shadow: inset 7px 8px 24px -6px rgba(119, 63, 25, 0.75);
     box-shadow: inset 7px 8px 24px -6px rgba(119, 63, 25, 0.75);
     -webkit-animation: shadowFade .75s;
 }
@@ -128,8 +133,6 @@ button:active {
     margin: auto;
     border-radius: 10px;
     padding: 15px;
-    -webkit-box-shadow: 22px 27px 91px -6px rgba(119, 63, 25, 0.75);
-    -moz-box-shadow: 22px 27px 91px -6px rgba(119, 63, 25, 0.75);
     box-shadow: 22px 27px 91px -6px rgba(119, 63, 25, 0.75);
     border: 1px solid grey;
 }
@@ -165,7 +168,6 @@ nav ul li.card-preview {
     padding: 10px;
     margin: 10px;
     cursor: pointer;
-    -moz-box-shadow: 8px 10px 11px -2px rgba(119, 63, 25, 0.75);
     box-shadow: 8px 10px 11px -2px rgba(119, 63, 25, 0.75);
     -webkit-animation: shadowFadeOut .5s;
     border-radius: 10px;
@@ -179,13 +181,14 @@ nav ul li.card-preview > * {
 }
 
 nav li.card-preview:hover {
+    -webkit-transition: background-color 0.5s ease;
     transition: background-color 0.5s ease;
     background-color: white;
 }
 
 nav li.card-preview.active {
+    -webkit-transition: box-shadow 0.75s ease;
     transition: box-shadow 0.75s ease;
-    -moz-box-shadow: inset 7px 8px 24px -6px rgba(119, 63, 25, 0.75);
     box-shadow: inset 7px 8px 24px -6px rgba(119, 63, 25, 0.75);
     -webkit-animation: shadowFade .75s;
 }
@@ -305,6 +308,7 @@ nav li.card-preview > * {
 }
 
 @media print,
+(-webkit-min-device-pixel-ratio: 1.25),
 (min-resolution: 1.25dppx),
 (min-resolution: 120dpi) {
     /* Style adjustments for high resolution devices */

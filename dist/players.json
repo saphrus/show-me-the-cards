@@ -1,0 +1,40 @@
+{
+  "players": [
+    {
+      "name": "Brianna",
+      "surname": "Forbes",
+      "nick": "Dreamlurk The Unstoppable",
+      "asset": "Foghammer Lead"
+    },
+    {
+      "name": "Darcy Candice",
+      "surname": "Ball",
+      "nick": "Crystaldash",
+      "asset": "Secret Glowquake Gold"
+    },
+    {
+      "name": "Hillary",
+      "surname": "Gibbs",
+      "nick": "Speedsoul",
+      "asset": "Shifting Rainshadow Iron"
+    },
+    {
+      "name": "Elva Becky",
+      "surname": "Hammond",
+      "nick": "Seekvenom The Mystic",
+      "asset": "Valkyries' Opal Adamant"
+    },
+    {
+      "name": "Enid",
+      "surname": "Rose",
+      "nick": "Coincurse The Ghoul",
+      "asset": "Jewelevil Bronze Of Goddesses"
+    },
+    {
+      "name": "Esmeralda",
+      "surname": "Carrillo",
+      "nick": "Skulldart",
+      "asset": "Yellow Orichalcum Of Paladins"
+    }
+  ]
+}
