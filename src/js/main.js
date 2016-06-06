@@ -75,10 +75,10 @@ $('#sendNames').on('click', function () {
     var playerCard = $("nav ul li.card-preview.active");
     var playerData = [
         {
-            "name": $(playerCard).find(".first").text(),
-            "surname": $(playerCard).find(".last").text(),
-            "nick": $(playerCard).find(".nick").text(),
-            "asset": $(playerCard).find(".asset").text()
+            "name": $(playerCard).find(".first").text().trim(),
+            "surname": $(playerCard).find(".last").text().trim(),
+            "nick": $(playerCard).find(".nick").text().trim(),
+            "asset": $(playerCard).find(".asset").text().trim()
         }
     ];
     // $.ajax override mock
